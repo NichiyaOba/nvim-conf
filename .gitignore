@@ -1,0 +1,16 @@
+# Vim/Neovim 一時ファイル
+*~
+*.swp
+*.swo
+
+# Neovim キャッシュ関連
+swap/
+undo/
+shada/
+session.vim
+
+# プラグインのインストール先は除外
+plugged/
+site/pack/*/start/*
+site/pack/*/opt/*
+plugin/packer_compiled.lua
