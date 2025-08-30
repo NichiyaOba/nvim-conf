@@ -9,8 +9,8 @@ set clipboard=unnamed
 syntax on 
 
 call plug#begin()
-Plug 'ntk148v/vim-horizon'
-Plug 'preservim/nerdtree'
+Plug 'ntk148v/vim-horizon' "color definition
+Plug 'preservim/nerdtree' "display fold tree
 call plug#end()
 
 set termguicolors
