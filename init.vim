@@ -11,6 +11,8 @@ syntax on
 call plug#begin()
 Plug 'ntk148v/vim-horizon' "color definition
 Plug 'preservim/nerdtree' "display fold tree
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "fuzzy file finder
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 set termguicolors
