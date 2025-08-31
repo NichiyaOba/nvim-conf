@@ -13,6 +13,7 @@ Plug 'ntk148v/vim-horizon' "color definition
 Plug 'preservim/nerdtree' "display fold tree
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "fuzzy file finder
 Plug 'junegunn/fzf.vim'
+Plug 'sheerun/vim-polyglot' "syntax highlight by polyglot
 call plug#end()
 
 set termguicolors
