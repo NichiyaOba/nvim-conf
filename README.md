@@ -34,3 +34,13 @@ cd ~/.config/nvim/pack/tpope/start
 git clone https://tpope.io/vim/commentary.git
 vim -u NONE -c "helptags commentary/doc" -c q
 ```
+
+It is recommended to add the following configuration to /Users/{user_name}/.zshrc.
+```
+setopt no_beep             # Disable the terminal beep sound
+setopt auto_pushd          # Automatically push the current directory onto the stack when using 'cd'
+setopt pushd_ignore_dups   # Prevent duplicate entries in the directory stack
+setopt share_history       # Share command history across all zsh sessions
+setopt inc_append_history  # Immediately append commands to the history file as they are executed
+
+```
