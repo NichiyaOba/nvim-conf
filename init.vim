@@ -29,3 +29,6 @@ let g:gitgutter_highlight_lines =1 "turn on highlighting by default
 " Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+
+" Shortcut for Git operation
+command! Gd Git diff
