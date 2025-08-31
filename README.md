@@ -10,7 +10,7 @@ Install fzf
 brew install fzf
 ```
 
-Install vim-fugitive（https://github.com/tpope/vim-fugitive）
+Install vim-fugitive： https://github.com/tpope/vim-fugitive
 
 ```
 mkdir -p ~/.config/nvim/pack/tpope/start
