@@ -18,6 +18,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} "code completion by coc.nvim
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter' "display file change like a VSCode
 call plug#end()
 
 set termguicolors
