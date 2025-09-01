@@ -15,6 +15,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "fuzzy file finder
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot' "syntax highlight by polyglot
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "code completion by coc.nvim
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 set termguicolors
