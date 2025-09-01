@@ -16,6 +16,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot' "syntax highlight by polyglot
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "code completion by coc.nvim
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 set termguicolors
