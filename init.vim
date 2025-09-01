@@ -35,4 +35,17 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
 " Shortcut for Git operation
-command! Gd Git diff
+command! Gs Git status      " show git status
+command! Ga Git add %       " stage current file
+command! Gc Git commit      " commit changes
+command! Gp Git push        " push commits
+command! Gl Git log --oneline --graph --decorate --all " show git log (pretty)
+command! Gd Git diff        " show git diff
+
+
+"Shortcut for search by fzf
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fg :Rg<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fh :History<CR>
+
