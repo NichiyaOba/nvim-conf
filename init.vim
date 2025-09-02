@@ -29,6 +29,7 @@ let g:lightline = {}
 let g:lightline.colorscheme = 'horizon'
 let g:lightline = {'colorscheme' : 'horizon'}
 let g:gitgutter_highlight_lines =1 "turn on highlighting by default 
+let mapleader = "\<Space>"
 
 " Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
@@ -49,3 +50,8 @@ nnoremap <leader>fg :Rg<CR>
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>fh :History<CR>
 
+"Shortcuts for definition jump
+nmap <silent> gd <Plug>(coc-definition)" 定義ジャンプ
+nmap <silent> gy <Plug>(coc-type-definition)" 型定義ジャンプ
+nmap <silent> gi <Plug>(coc-implementation)" 実装ジャンプ
+nmap <silent> gr <Plug>(coc-references)" 参照検索
