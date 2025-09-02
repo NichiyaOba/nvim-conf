@@ -43,7 +43,7 @@ command! Gl Git log --oneline --graph --decorate --all " show git log (pretty)
 command! Gd Git diff        " show git diff
 
 
-"Shortcut for search by fzf
+"Shortcuts for search by fzf
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fg :Rg<CR>
 nnoremap <leader>fb :Buffers<CR>
