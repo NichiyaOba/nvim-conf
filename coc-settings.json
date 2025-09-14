@@ -1,0 +1,21 @@
+{
+  // タイプ中フォーマットを有効化
+  "coc.preferences.formatOnType": true,
+
+  // 言語ごとに保存時フォーマットを有効化
+  "[typescript]": { "coc.preferences.formatOnSave": true },
+  "[typescriptreact]": { "coc.preferences.formatOnSave": true },
+  "[javascript]": { "coc.preferences.formatOnSave": true },
+  "[javascriptreact]": { "coc.preferences.formatOnSave": true },
+
+  // Prettier で整形
+  "prettier.enable": true,
+  "prettier.requireConfig": false, // .prettierrc がなくても動く
+  "prettier.semi": true,
+  "prettier.singleQuote": true,
+  "suggest.noselect": false,
+  "suggest.autoTrigger": "always",
+  "typescript.suggest.autoImports": true,
+  "javascript.suggest.autoImports": true,
+  "coc.preferences.formatOnSave": true
+}

@@ -19,6 +19,13 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'NeogitOrg/neogit'
 Plug 'sindrets/diffview.nvim'  
 Plug 'ryanoasis/vim-devicons'
+Plug 'folke/tokyonight.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'windwp/nvim-ts-autotag'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'github/copilot.vim'
 call plug#end()
 
@@ -85,3 +92,11 @@ command! -nargs=* -complete=file Rg call fzf#vim#grep(
   \ 1,
   \ fzf#vim#with_preview({'sink*': function('s:open_in_right_vsplit')}),
   \ 0)
+
+" 保存前に organize imports を実行
+autocmd BufWritePre *.ts,*.tsx,*.js,*.jsx
+      \ :silent! call CocAction('runCommand', 'editor.action.organizeImport')
+
+" Enterキーで補完候補を確定（なければ改行）
+inoremap <expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
+

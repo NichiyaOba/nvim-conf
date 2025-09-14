@@ -35,6 +35,12 @@ git clone https://tpope.io/vim/commentary.git
 vim -u NONE -c "helptags commentary/doc" -c q
 ```
 
+
+Install for React development
+```
+:CocInstall coc-tsserver coc-eslint coc-prettier
+```
+
 It is recommended to add the following configuration to /Users/{user_name}/.zshrc.
 ```
 setopt no_beep             # Disable the terminal beep sound
