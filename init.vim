@@ -37,7 +37,7 @@ command! Gc Git commit      " commit changes
 command! Gp Git push        " push commits
 command! Gl Git log --oneline --graph --decorate --all " show git log (pretty)
 command! Gd Git diff        " show git diff
-
+command! Gds Gdiffsplit!    " vertical diff split of current file (HEAD vs working tree)
 
 "Shortcuts for search by fzf
 nnoremap <leader>ff :Files<CR>
