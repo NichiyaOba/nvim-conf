@@ -14,6 +14,9 @@ Plug 'preservim/nerdtree' "display fold tree
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "fuzzy file finder
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter' "display file change like a VSCode
+Plug 'nvim-lua/plenary.nvim'
+Plug 'NeogitOrg/neogit'
+Plug 'sindrets/diffview.nvim'  
 call plug#end()
 
 set termguicolors
@@ -38,6 +41,14 @@ command! Gp Git push        " push commits
 command! Gl Git log --oneline --graph --decorate --all " show git log (pretty)
 command! Gd Git diff        " show git diff
 command! Gds Gdiffsplit!    " vertical diff split of current file (HEAD vs working tree)
+
+" setup（NeovimならOK、VimでもLua有効なら可)
+lua << EOF
+require('neogit').setup({
+  integrations = { diffview = true },
+})
+EOF
+nnoremap <leader>gg :Neogit kind=split<CR>
 
 "Shortcuts for search by fzf
 nnoremap <leader>ff :Files<CR>
