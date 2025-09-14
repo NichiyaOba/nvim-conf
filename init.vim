@@ -60,3 +60,28 @@ nmap <silent> gd <Plug>(coc-definition)" 定義ジャンプ
 nmap <silent> gy <Plug>(coc-type-definition)" 型定義ジャンプ
 nmap <silent> gi <Plug>(coc-implementation)" 実装ジャンプ
 nmap <silent> gr <Plug>(coc-references)" 参照検索
+
+" --- Rg: 右側 split で開き、行/桁へもジャンプする ---
+function! s:open_in_right_vsplit(lines) abort
+  " a:lines[0] はヘッダ（アクションキーなど）、実データは a:lines[1]
+  if len(a:lines) < 2 | return | endif
+  let l:match = a:lines[1]
+  " 形式: path:lnum:col: text...
+  let l:parts = split(l:match, ':', 1)
+  if len(l:parts) < 3 | return | endif
+
+  let l:file = l:parts[0]
+  let l:lnum = str2nr(l:parts[1])
+  let l:col  = str2nr(l:parts[2])
+
+  execute 'rightbelow vsplit' fnameescape(l:file)
+  call cursor(l:lnum, max([1, l:col]))
+  normal! zvzz
+endfunction
+
+command! -nargs=* -complete=file Rg call fzf#vim#grep(
+  \ 'rg --column --line-number --no-heading --hidden --smart-case --glob "!.git/*" '
+  \ . shellescape(<q-args>),
+  \ 1,
+  \ fzf#vim#with_preview({'sink*': function('s:open_in_right_vsplit')}),
+  \ 0)
