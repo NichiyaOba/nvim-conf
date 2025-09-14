@@ -100,3 +100,7 @@ autocmd BufWritePre *.ts,*.tsx,*.js,*.jsx
 " Enterキーで補完候補を確定（なければ改行）
 inoremap <expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
 
+" プロジェクトルートからの相対パスをクリップボードにコピー
+command! CopyRelativePath let @+ = fnamemodify(expand('%'), ':.') | echo "Copied: " . fnamemodify(expand('%'), ':.')
+nnoremap <leader>y :CopyRelativePath<CR>
+
