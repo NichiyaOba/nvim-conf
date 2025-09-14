@@ -23,10 +23,6 @@ set termguicolors
 
 colorscheme horizon
 
-let g:lightline = {}
-let g:lightline.colorscheme = 'horizon'
-let g:lightline = {'colorscheme' : 'horizon'}
-let g:gitgutter_highlight_lines =1 "turn on highlighting by default 
 let mapleader = "\<Space>"
 
 " Start NERDTree when Vim is started without file arguments.
