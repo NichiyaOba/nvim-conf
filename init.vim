@@ -93,6 +93,27 @@ command! -nargs=* -complete=file Rg call fzf#vim#grep(
   \ fzf#vim#with_preview({'sink*': function('s:open_in_right_vsplit')}),
   \ 0)
 
+
+" --- Files: 選択したファイルを右側 split で開く ---
+function! s:open_file_in_right_vsplit(lines) abort
+  if empty(a:lines) | return | endif
+  " 複数選択に対応（Ctrl-T 等で複数選んだときも全部開く）
+  for l:file in a:lines
+    if empty(l:file) | continue | endif
+    execute 'rightbelow vsplit' fnameescape(l:file)
+  endfor
+endfunction
+
+" fzf.vim の Files を拡張して右 split で開く
+command! -nargs=* FilesRight call fzf#vim#files(
+  \ <q-args>,
+  \ fzf#vim#with_preview({'sink*': function('s:open_file_in_right_vsplit')}),
+  \ 0)
+
+" <Space>ff を右 split バージョンに差し替え
+nnoremap <leader>ff :FilesRight<CR>
+
+
 " 保存前に organize imports を実行
 autocmd BufWritePre *.ts,*.tsx,*.js,*.jsx
       \ :silent! call CocAction('runCommand', 'editor.action.organizeImport')
