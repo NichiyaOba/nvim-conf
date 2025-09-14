@@ -6,6 +6,7 @@ set textwidth=0
 set autoindent
 set hlsearch
 set clipboard=unnamed
+set encoding=UTF-8
 syntax on 
 
 call plug#begin()
@@ -17,6 +18,7 @@ Plug 'airblade/vim-gitgutter' "display file change like a VSCode
 Plug 'nvim-lua/plenary.nvim'
 Plug 'NeogitOrg/neogit'
 Plug 'sindrets/diffview.nvim'  
+Plug 'ryanoasis/vim-devicons'
 Plug 'github/copilot.vim'
 call plug#end()
 
