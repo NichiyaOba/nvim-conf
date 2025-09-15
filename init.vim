@@ -134,6 +134,11 @@ nnoremap <leader>ff :FilesRight<CR>
 autocmd BufWritePre *.ts,*.tsx,*.js,*.jsx
       \ :silent! call CocAction('runCommand', 'editor.action.organizeImport')
 
+" Go: 保存前に import 整理 + フォーマット
+autocmd BufWritePre *.go :silent! call CocAction('organizeImport')
+autocmd BufWritePre *.go :silent! call CocAction('format')
+
+
 " Enterキーで補完候補を確定（なければ改行）
 inoremap <expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
 
