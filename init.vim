@@ -146,3 +146,12 @@ inoremap <expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
 command! CopyRelativePath let @+ = fnamemodify(expand('%'), ':.') | echo "Copied: " . fnamemodify(expand('%'), ':.')
 nnoremap <leader>y :CopyRelativePath<CR>
 
+" --- tokyonight の設定 ---
+lua << EOF
+require("tokyonight").setup({
+  lsp_semantic_tokens = true,
+})
+EOF
+colorscheme tokyonight
+
+

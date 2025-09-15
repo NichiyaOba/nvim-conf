@@ -2,11 +2,18 @@
   // タイプ中フォーマットを有効化
   "coc.preferences.formatOnType": true,
 
+  "semanticTokens.enable": true,
   // 言語ごとに保存時フォーマットを有効化
   "[typescript]": { "coc.preferences.formatOnSave": true },
   "[typescriptreact]": { "coc.preferences.formatOnSave": true },
   "[javascript]": { "coc.preferences.formatOnSave": true },
   "[javascriptreact]": { "coc.preferences.formatOnSave": true },
+  "go.goplsOptions": {
+    "semanticTokens": true,
+    "codelenes": { "gc_details": true },
+    "ui.semanticTokens": true,
+    "ui.inlayhint.enabled": true
+  },
 
   // Prettier で整形
   "prettier.enable": true,

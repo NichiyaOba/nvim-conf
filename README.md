@@ -61,6 +61,13 @@ install for Go syntax highlighting
 :TSInstall go
 ```
 
+Install for Go Syntax Highlighting
+
+```
+mkdir -p $(go env GOPATH)/bin
+go install golang.org/x/tools/gopls@latest
+```
+
 It is recommended to add the following configuration to /Users/{user_name}/.zshrc.
 
 ```
