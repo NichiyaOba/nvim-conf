@@ -55,6 +55,12 @@ and install Go tools
 go install golang.org/x/tools/gopls@latest
 ```
 
+install for Go syntax highlighting
+
+```
+:TSInstall go
+```
+
 It is recommended to add the following configuration to /Users/{user_name}/.zshrc.
 
 ```
