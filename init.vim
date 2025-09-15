@@ -68,6 +68,14 @@ nnoremap <leader>fg :Rg<CR>
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>fh :History<CR>
 
+" 現在のファイル位置をNERDTreeで表示
+nnoremap <leader>n :NERDTreeFind<CR>
+
+" NERDTreeを全体リフレッシュ（ツリーが開いていなければ開く）
+nnoremap <leader>R :NERDTreeFocus<CR>R:wincmd p<CR>
+
+
+
 "Shortcuts for definition jump (右splitで開く)
 nnoremap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
 nnoremap <silent> gy :call CocAction('jumpTypeDefinition', 'vsplit')<CR>
