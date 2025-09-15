@@ -31,8 +31,14 @@ call plug#end()
 
 set termguicolors
 set splitright
+set number                 " 絶対行番号
+set norelativenumber       " 相対行番号はオフ
+set numberwidth=2          " 行番号欄をコンパクトに（2〜3が目安）
+set cursorline             " 現在行を見やすく
+set signcolumn=auto:1      " 記号欄も最小限に
 
-colorscheme horizon
+colorscheme tokyonight
+
 
 let mapleader = "\<Space>"
 
