@@ -70,6 +70,11 @@ require("tokyonight").setup({
 EOF
 
 
+highlight NvimTreeWinSeparator guifg=#888888 guibg=NONE
+highlight NvimTreeNormal guibg=#1f2335
+highlight NvimTreeNormalNC guibg=#1f2335
+
+
 " ==================================================
 " Leader キー
 " ==================================================
