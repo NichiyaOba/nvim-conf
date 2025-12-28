@@ -26,6 +26,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'github/copilot.vim'
+Plug 'hashivim/vim-terraform'
 call plug#end()
 
 set termguicolors
@@ -137,6 +138,16 @@ autocmd BufWritePre *.ts,*.tsx,*.js,*.jsx
 " Go: 保存前に import 整理 + フォーマット
 autocmd BufWritePre *.go :silent! call CocAction('organizeImport')
 autocmd BufWritePre *.go :silent! call CocAction('format')
+
+" Terraform: 保存前にフォーマット
+autocmd BufWritePre *.tf,*.tfvars :silent! call CocAction('format')
+
+" Coc の Terraform フォーマットを無効
+autocmd! BufWritePre *.tf,*.tfvars
+
+" Terraform設定
+let g:terraform_fmt_on_save=1
+let g:terraform_align=1
 
 
 " Enterキーで補完候補を確定（なければ改行）
