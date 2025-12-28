@@ -148,8 +148,8 @@ require('neogit').setup({
   integrations = { diffview = true },
 })
 EOF
-nnoremap <leader>gg :Neogit kind=split<CR>
 
+nnoremap <leader>gg :Neogit kind=vsplit<CR>
 
 " ==================================================
 " fzf
