@@ -1,61 +1,103 @@
+" ==================================================
+" 基本設定
+" ==================================================
 set shell=/bin/zsh
+set encoding=UTF-8
+set clipboard=unnamed
+set termguicolors
+
 set shiftwidth=4
 set tabstop=2
 set expandtab
 set textwidth=0
 set autoindent
-set hlsearch
-set clipboard=unnamed
-set encoding=UTF-8
-syntax on 
 
+set hlsearch
+set splitright
+
+" 行番号・表示系
+set number                 " 絶対行番号
+set norelativenumber       " 相対行番号オフ
+set numberwidth=2
+set cursorline
+set signcolumn=auto:1
+
+
+" ==================================================
+" プラグイン管理 (vim-plug)
+" ==================================================
 call plug#begin()
-Plug 'ntk148v/vim-horizon' "color definition
-Plug 'preservim/nerdtree' "display fold tree
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "fuzzy file finder
+
+" カラースキーム
+Plug 'ntk148v/vim-horizon'
+Plug 'folke/tokyonight.nvim'
+
+" ファイル / UI
+Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-gitgutter' "display file change like a VSCode
+
+" Git
+Plug 'airblade/vim-gitgutter'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'NeogitOrg/neogit'
-Plug 'sindrets/diffview.nvim'  
-Plug 'ryanoasis/vim-devicons'
-Plug 'folke/tokyonight.nvim'
+Plug 'sindrets/diffview.nvim'
+
+" 開発支援
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'windwp/nvim-ts-autotag'
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'github/copilot.vim'
+
+" 言語別
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
 Plug 'hashivim/vim-terraform'
+
 call plug#end()
 
-set termguicolors
-set splitright
-set number                 " 絶対行番号
-set norelativenumber       " 相対行番号はオフ
-set numberwidth=2          " 行番号欄をコンパクトに（2〜3が目安）
-set cursorline             " 現在行を見やすく
-set signcolumn=auto:1      " 記号欄も最小限に
 
+" ==================================================
+" カラースキーム設定
+" ==================================================
 colorscheme tokyonight
 
+lua << EOF
+require("tokyonight").setup({
+  lsp_semantic_tokens = true,
+})
+EOF
 
+
+" ==================================================
+" Leader キー
+" ==================================================
 let mapleader = "\<Space>"
 
-" Start NERDTree when Vim is started without file arguments.
+
+" ==================================================
+" NERDTree
+" ==================================================
+" 起動時にファイル指定がなければ開く
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
-" Shortcut for Git operation
-command! Gs Git status      " show git status
-command! Ga Git add %       " stage current file
-command! Gc Git commit      " commit changes
-command! Gp Git push        " push commits
-command! Gl Git log --oneline --graph --decorate --all " show git log (pretty)
-command! Gd Git diff        " show git diff
-command! Gds Gdiffsplit!    " vertical diff split of current file (HEAD vs working tree)
+nnoremap <leader>n :NERDTreeFind<CR>
+nnoremap <leader>R :NERDTreeFocus<CR>R:wincmd p<CR>
 
-" setup（NeovimならOK、VimでもLua有効なら可)
+
+" ==================================================
+" Git コマンド
+" ==================================================
+command! Gs Git status
+command! Ga Git add %
+command! Gc Git commit
+command! Gp Git push
+command! Gl Git log --oneline --graph --decorate --all
+command! Gd Git diff
+command! Gds Gdiffsplit!
+
 lua << EOF
 require('neogit').setup({
   integrations = { diffview = true },
@@ -63,106 +105,82 @@ require('neogit').setup({
 EOF
 nnoremap <leader>gg :Neogit kind=split<CR>
 
-"Shortcuts for search by fzf
-nnoremap <leader>ff :Files<CR>
-nnoremap <leader>fg :Rg<CR>
+
+" ==================================================
+" fzf
+" ==================================================
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>fh :History<CR>
 
-" 現在のファイル位置をNERDTreeで表示
-nnoremap <leader>n :NERDTreeFind<CR>
-
-" NERDTreeを全体リフレッシュ（ツリーが開いていなければ開く）
-nnoremap <leader>R :NERDTreeFocus<CR>R:wincmd p<CR>
-
-
-
-"Shortcuts for definition jump (右splitで開く)
-nnoremap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
-nnoremap <silent> gy :call CocAction('jumpTypeDefinition', 'vsplit')<CR>
-nnoremap <silent> gi :call CocAction('jumpImplementation', 'vsplit')<CR>
-nnoremap <silent> gr :call CocAction('jumpReferences', 'vsplit')<CR>
-
-
-
-" --- Rg: 右側 split で開き、行/桁へもジャンプする ---
-function! s:open_in_right_vsplit(lines) abort
-  " a:lines[0] はヘッダ（アクションキーなど）、実データは a:lines[1]
-  if len(a:lines) < 2 | return | endif
-  let l:match = a:lines[1]
-  " 形式: path:lnum:col: text...
-  let l:parts = split(l:match, ':', 1)
-  if len(l:parts) < 3 | return | endif
-
-  let l:file = l:parts[0]
-  let l:lnum = str2nr(l:parts[1])
-  let l:col  = str2nr(l:parts[2])
-
-  execute 'rightbelow vsplit' fnameescape(l:file)
-  call cursor(l:lnum, max([1, l:col]))
-  normal! zvzz
-endfunction
-
-command! -nargs=* -complete=file Rg call fzf#vim#grep(
-  \ 'rg --column --line-number --no-heading --hidden --smart-case --glob "!.git/*" '
-  \ . shellescape(<q-args>),
-  \ 1,
-  \ fzf#vim#with_preview({'sink*': function('s:open_in_right_vsplit')}),
-  \ 0)
-
-
-" --- Files: 選択したファイルを右側 split で開く ---
+" --- Files: 右 split で開く ---
 function! s:open_file_in_right_vsplit(lines) abort
-  if empty(a:lines) | return | endif
-  " 複数選択に対応（Ctrl-T 等で複数選んだときも全部開く）
   for l:file in a:lines
     if empty(l:file) | continue | endif
     execute 'rightbelow vsplit' fnameescape(l:file)
   endfor
 endfunction
 
-" fzf.vim の Files を拡張して右 split で開く
 command! -nargs=* FilesRight call fzf#vim#files(
   \ <q-args>,
   \ fzf#vim#with_preview({'sink*': function('s:open_file_in_right_vsplit')}),
   \ 0)
 
-" <Space>ff を右 split バージョンに差し替え
 nnoremap <leader>ff :FilesRight<CR>
 
+" --- Rg: 右 split + 行ジャンプ ---
+function! s:open_in_right_vsplit(lines) abort
+  if len(a:lines) < 2 | return | endif
+  let l:parts = split(a:lines[1], ':', 1)
+  if len(l:parts) < 3 | return | endif
 
-" 保存前に organize imports を実行
+  execute 'rightbelow vsplit' fnameescape(l:parts[0])
+  call cursor(str2nr(l:parts[1]), str2nr(l:parts[2]))
+  normal! zvzz
+endfunction
+
+command! -nargs=* Rg call fzf#vim#grep(
+  \ 'rg --column --line-number --no-heading --hidden --smart-case --glob "!.git/*" '
+  \ . shellescape(<q-args>),
+  \ 1,
+  \ fzf#vim#with_preview({'sink*': function('s:open_in_right_vsplit')}),
+  \ 0)
+
+nnoremap <leader>fg :Rg<CR>
+
+
+" ==================================================
+" Coc / LSP
+" ==================================================
+nnoremap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
+nnoremap <silent> gy :call CocAction('jumpTypeDefinition', 'vsplit')<CR>
+nnoremap <silent> gi :call CocAction('jumpImplementation', 'vsplit')<CR>
+nnoremap <silent> gr :call CocAction('jumpReferences', 'vsplit')<CR>
+
+inoremap <expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
+
+
+" ==================================================
+" 保存時フック（言語別）
+" ==================================================
+" JS / TS
 autocmd BufWritePre *.ts,*.tsx,*.js,*.jsx
       \ :silent! call CocAction('runCommand', 'editor.action.organizeImport')
 
-" Go: 保存前に import 整理 + フォーマット
+" Go
 autocmd BufWritePre *.go :silent! call CocAction('organizeImport')
 autocmd BufWritePre *.go :silent! call CocAction('format')
 
-" Terraform: 保存前にフォーマット
-autocmd BufWritePre *.tf,*.tfvars :silent! call CocAction('format')
-
-" Coc の Terraform フォーマットを無効
+" Terraform
 autocmd! BufWritePre *.tf,*.tfvars
-
-" Terraform設定
 let g:terraform_fmt_on_save=1
 let g:terraform_align=1
 
 
-" Enterキーで補完候補を確定（なければ改行）
-inoremap <expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
-
-" プロジェクトルートからの相対パスをクリップボードにコピー
-command! CopyRelativePath let @+ = fnamemodify(expand('%'), ':.') | echo "Copied: " . fnamemodify(expand('%'), ':.')
+" ==================================================
+" ユーティリティ
+" ==================================================
+" プロジェクトルートからの相対パスをコピー
+command! CopyRelativePath let @+ = fnamemodify(expand('%'), ':.')
+      \ | echo "Copied: " . fnamemodify(expand('%'), ':.')
 nnoremap <leader>y :CopyRelativePath<CR>
-
-" --- tokyonight の設定 ---
-lua << EOF
-require("tokyonight").setup({
-  lsp_semantic_tokens = true,
-})
-EOF
-colorscheme tokyonight
-
 
