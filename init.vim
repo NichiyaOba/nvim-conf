@@ -33,7 +33,6 @@ Plug 'ntk148v/vim-horizon'
 Plug 'folke/tokyonight.nvim'
 
 " ファイル / UI
-Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -74,18 +73,6 @@ EOF
 " Leader キー
 " ==================================================
 let mapleader = "\<Space>"
-
-
-" ==================================================
-" NERDTree
-" ==================================================
-" 起動時にファイル指定がなければ開く
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
-
-nnoremap <leader>n :NERDTreeFind<CR>
-nnoremap <leader>R :NERDTreeFocus<CR>R:wincmd p<CR>
-
 
 " ==================================================
 " Git コマンド
