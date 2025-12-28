@@ -33,7 +33,8 @@ Plug 'ntk148v/vim-horizon'
 Plug 'folke/tokyonight.nvim'
 
 " ファイル / UI
-Plug 'ryanoasis/vim-devicons'
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-tree/nvim-web-devicons'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
@@ -73,6 +74,55 @@ EOF
 " Leader キー
 " ==================================================
 let mapleader = "\<Space>"
+
+" ==================================================
+" nvim-tree
+" ==================================================
+nnoremap <leader>e :NvimTreeToggle<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+autocmd VimEnter * if argc() == 1 | NvimTreeOpen | endif
+
+
+lua << EOF
+require("nvim-tree").setup({
+  disable_netrw = true,
+  hijack_netrw = true,
+
+  view = {
+    width = 30,
+    side = "left",
+  },
+
+  renderer = {
+    highlight_git = true,
+    highlight_opened_files = "name",
+    icons = {
+      show = {
+        file = true,
+        folder = true,
+        folder_arrow = true,
+        git = true,
+      },
+    },
+  },
+
+  filters = {
+    dotfiles = false, -- ドットファイル表示
+  },
+
+  update_focused_file = {
+    enable = true,       -- ★ VSCode ライクの核心
+    update_root = false,
+  },
+
+  actions = {
+    open_file = {
+      quit_on_open = false,
+    },
+  },
+})
+EOF
+
 
 " ==================================================
 " Git コマンド
