@@ -188,13 +188,47 @@ nnoremap <leader>fg :Rg<CR>
 " ==================================================
 " Coc / LSP
 " ==================================================
-nnoremap <silent> gd :call CocAction('jumpDefinition', 'vsplit')<CR>
-nnoremap <silent> gy :call CocAction('jumpTypeDefinition', 'vsplit')<CR>
-nnoremap <silent> gi :call CocAction('jumpImplementation', 'vsplit')<CR>
-nnoremap <silent> gr :call CocAction('jumpReferences', 'vsplit')<CR>
+
+function! s:coc_jump_vsplit_safe(action) abort
+  let l:pos = getcurpos()
+
+  call CocAction(a:action)
+
+  " ジャンプ後の位置を取得
+  let l:newpos = getcurpos()
+
+  " 同じ場所なら何もしない
+  if l:pos == l:newpos
+    echo "No definition found"
+    return
+  endif
+
+  if l:pos == l:newpos
+    call CocActionAsync('doHover')
+    return
+  endif
+
+  " 違う場所なら vsplit に移動
+  execute 'rightbelow vsplit'
+  normal! zvzz
+endfunction
+
+nnoremap <silent> gd :call <SID>coc_jump_vsplit_safe('jumpDefinition')<CR>
+nnoremap <silent> gy :call <SID>coc_jump_vsplit_safe('jumpTypeDefinition')<CR>
+nnoremap <silent> gi :call <SID>coc_jump_vsplit_safe('jumpImplementation')<CR>
+nnoremap <silent> gr :call <SID>coc_jump_vsplit_safe('jumpReferences')<CR>
+
+
+nnoremap <silent> <leader>gd :CocFzfList definitions<CR>
+nnoremap <silent> <leader>gr :CocFzfList references<CR>
+nnoremap <silent> <leader>gi :CocFzfList implementations<CR>
+
 
 inoremap <expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
 
+" 定義ジャンプの戻り
+nnoremap <leader>b <C-o>   " 戻る
+nnoremap <leader>f <C-i>   " 進む
 
 " ==================================================
 " 保存時フック（言語別）
