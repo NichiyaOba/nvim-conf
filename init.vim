@@ -87,8 +87,9 @@ nnoremap <leader>e :NvimTreeToggle<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 autocmd VimEnter * if argc() == 1 | NvimTreeOpen | endif
 
-
 lua << EOF
+local api = require("nvim-tree.api")
+
 require("nvim-tree").setup({
   disable_netrw = true,
   hijack_netrw = true,
@@ -112,11 +113,11 @@ require("nvim-tree").setup({
   },
 
   filters = {
-    dotfiles = false, -- ドットファイル表示
+    dotfiles = false,
   },
 
   update_focused_file = {
-    enable = true,       -- ★ VSCode ライクの核心
+    enable = true,
     update_root = false,
   },
 
@@ -128,8 +129,25 @@ require("nvim-tree").setup({
       },
     },
   },
+
+  on_attach = function(bufnr)
+    local function opts(desc)
+      return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true }
+    end
+
+    -- デフォルトマッピング
+    api.config.mappings.default_on_attach(bufnr)
+
+    -- ★ Enter で「右に vertical split で開く」
+    vim.keymap.set('n', '<CR>', api.node.open.vertical, opts("Open: Vertical Split"))
+
+    -- 参考（必要なら）
+    -- vim.keymap.set('n', 's', api.node.open.horizontal, opts("Open: Horizontal Split"))
+    -- vim.keymap.set('n', 't', api.node.open.tab, opts("Open: New Tab"))
+  end,
 })
 EOF
+
 
 
 " ==================================================
