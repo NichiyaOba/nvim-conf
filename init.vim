@@ -155,6 +155,8 @@ require("nvim-tree").setup({
 })
 EOF
 
+" nvim-treeをリロードするキーマッピングを追加
+nnoremap <leader>r :lua require("nvim-tree.api").tree.reload()<CR>
 
 
 " ==================================================
