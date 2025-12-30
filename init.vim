@@ -74,6 +74,13 @@ highlight NvimTreeWinSeparator guifg=#888888 guibg=NONE
 highlight NvimTreeNormal guibg=#1f2335
 highlight NvimTreeNormalNC guibg=#1f2335
 
+" ==================================================
+" 折り返し・スクロール設定
+" ==================================================
+set nowrap                " 行を折り返さない
+set sidescroll=1          " 横スクロールを細かく
+set sidescrolloff=5       " 端に余白を持たせる
+
 
 " ==================================================
 " Leader キー
