@@ -43,6 +43,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'NeogitOrg/neogit'
 Plug 'sindrets/diffview.nvim'
+Plug 'f-person/git-blame.nvim'
 
 " 開発支援
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -177,6 +178,17 @@ require('neogit').setup({
 EOF
 
 nnoremap <leader>gg :Neogit kind=vsplit<CR>
+
+" ==================================================
+" git-blame.nvim（GitLens風 inline blame）
+" ==================================================
+let g:gitblame_enabled = 1
+let g:gitblame_message_template = '<author> • <summary> • <date>'
+let g:gitblame_date_format = '%Y-%m-%d'
+let g:gitblame_highlight_group = 'Comment'
+
+" トグル（常時ONだとうるさい時用）
+nnoremap <leader>gb :GitBlameToggle<CR>
 
 " ==================================================
 " fzf
