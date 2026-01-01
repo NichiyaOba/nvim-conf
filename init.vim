@@ -190,6 +190,16 @@ let g:gitblame_highlight_group = 'Comment'
 " トグル（常時ONだとうるさい時用）
 nnoremap <leader>gb :GitBlameToggle<CR>
 
+" 変更箇所を移動
+nnoremap ]c :GitGutterNextHunk<CR>
+nnoremap [c :GitGutterPrevHunk<CR>
+
+" 差分プレビュー（VSCode の hover diff）
+nnoremap <leader>hp :GitGutterPreviewHunk<CR>
+
+" 元に戻す
+nnoremap <leader>hu :GitGutterUndoHunk<CR>
+
 " ==================================================
 " fzf
 " ==================================================
