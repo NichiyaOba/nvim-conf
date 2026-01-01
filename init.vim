@@ -123,6 +123,16 @@ require("nvim-tree").setup({
         folder_arrow = true,
         git = true,
       },
+      glyphs = {
+        git = {
+          unstaged = "*",
+          staged = "✓",
+          untracked = "☆",
+          renamed = "➜",
+          deleted = "",
+          ignored = "◌",
+        },
+      },
     },
   },
 
