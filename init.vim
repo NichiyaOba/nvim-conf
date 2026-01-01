@@ -42,6 +42,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'NeogitOrg/neogit'
+Plug 'kdheepak/lazygit.nvim'
 Plug 'sindrets/diffview.nvim'
 Plug 'f-person/git-blame.nvim'
 
@@ -261,28 +262,22 @@ nnoremap <leader>fg :Rg<CR>
 " ==================================================
 " Coc / LSP
 " ==================================================
+function! s:coc_jump_vsplit(action) abort
+  " 元ウィンドウを記録
+  let l:origin_win = win_getid()
 
-function! s:coc_jump_vsplit_safe(action) abort
-  let l:pos = getcurpos()
+  " 右に split
+  rightbelow vsplit
 
+  " 新しいウィンドウでジャンプ
   call CocAction(a:action)
 
-  " ジャンプ後の位置を取得
-  let l:newpos = getcurpos()
-
-  " 同じ場所なら何もしない
-  if l:pos == l:newpos
+  " ジャンプ失敗したら元に戻す
+  if win_getid() == l:origin_win
     echo "No definition found"
     return
   endif
 
-  if l:pos == l:newpos
-    call CocActionAsync('doHover')
-    return
-  endif
-
-  " 違う場所なら vsplit に移動
-  execute 'rightbelow vsplit'
   normal! zvzz
 endfunction
 
