@@ -328,3 +328,7 @@ command! CopyRelativePath let @+ = fnamemodify(expand('%'), ':.')
       \ | echo "Copied: " . fnamemodify(expand('%'), ':.')
 nnoremap <leader>y :CopyRelativePath<CR>
 
+" Visual モードで行を上下に移動
+xnoremap J :m '>+1<CR>gv=gv
+xnoremap K :m '<-2<CR>gv=gv
+
