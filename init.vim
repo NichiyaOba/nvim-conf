@@ -71,9 +71,15 @@ require("tokyonight").setup({
 EOF
 
 
+" === nvim-tree Git status 強調 ===
 highlight NvimTreeWinSeparator guifg=#888888 guibg=NONE
 highlight NvimTreeNormal guibg=#1f2335
 highlight NvimTreeNormalNC guibg=#1f2335
+highlight NvimTreeGitDirty guifg=#ff6c6b gui=bold
+highlight NvimTreeGitStaged guifg=#e0af68 gui=bold
+highlight NvimTreeGitNew guifg=#9ece6a gui=bold
+highlight NvimTreeGitDeleted guifg=#f7768e gui=bold
+
 
 " ==================================================
 " 折り返し・スクロール設定
