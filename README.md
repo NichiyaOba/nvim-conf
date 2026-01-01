@@ -68,6 +68,121 @@ mkdir -p $(go env GOPATH)/bin
 go install golang.org/x/tools/gopls@latest
 ```
 
+Install git-cz (Conventional Commits CLI): https://github.com/streamich/git-cz
+
+```
+npm install -g git-cz
+```
+
+<details>
+<summary>changelog.config.js (プロジェクトルート or ~/.changelog.config.js に配置)</summary>
+
+グローバルに適用する場合は `~/.changelog.config.js` に配置してください。
+
+```js
+module.exports = {
+  disableEmoji: false,
+  format: "{type}{scope}: {emoji}{subject}",
+  list: [
+    "feat",
+    "test",
+    "fix",
+    "chore",
+    "docs",
+    "refactor",
+    "style",
+    "ci",
+    "perf",
+    "package",
+    "config",
+    "WIP",
+  ],
+  maxMessageLength: 64,
+  minMessageLength: 3,
+  questions: [
+    "type",
+    "scope",
+    "subject",
+    "body",
+    "breaking",
+    "issues",
+    "lerna",
+  ],
+  scopes: [],
+  types: {
+    feat: {
+      description: "新機能",
+      emoji: "🎸",
+      value: "feat",
+    },
+    chore: {
+      description: "ビルド関連やライブラリの変更",
+      emoji: "🤖",
+      value: "chore",
+    },
+    ci: {
+      description: "CI関連の変更",
+      emoji: "🎡",
+      value: "ci",
+    },
+    docs: {
+      description: "ドキュメントの更新",
+      emoji: "✏️",
+      value: "docs",
+    },
+    fix: {
+      description: "不具合の修正",
+      emoji: "🐛",
+      value: "fix",
+    },
+    perf: {
+      description: "パフォーマンス改善",
+      emoji: "⚡️",
+      value: "perf",
+    },
+    refactor: {
+      description: "リファクタリング",
+      emoji: "💡",
+      value: "refactor",
+    },
+    style: {
+      description: "コードの処理に影響しない変更（スペースや書式設定など)",
+      emoji: "💄",
+      value: "style",
+    },
+    test: {
+      description: "テストコード",
+      emoji: "💍",
+      value: "test",
+    },
+    package: {
+      description: "パッケージ",
+      emoji: "📦",
+      value: "package",
+    },
+    config: {
+      description: "設定ファイル",
+      emoji: "⚙",
+      value: "config",
+    },
+    WIP: {
+      description: "作業途中",
+      emoji: "🚧",
+      value: "WIP",
+    },
+  },
+  messages: {
+    type: "プレフィックスを選択:",
+    subject: "コミットのタイトル（概要）を入力(option):\n",
+    body: "変更内容の詳細を入力(option):\n",
+    breaking: "重大な変更を入力(option):\n",
+    issues: "関連するisuueを入力(option), 例 #123:",
+  },
+};
+```
+
+</details>
+
 It is recommended to add the following configuration to /Users/{user_name}/.zshrc.
 
 ```
