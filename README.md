@@ -68,6 +68,33 @@ mkdir -p $(go env GOPATH)/bin
 go install golang.org/x/tools/gopls@latest
 ```
 
+Install cz-git (Conventional Commits CLI): https://cz-git.qbb.sh/
+
+```
+npm install -g cz-git commitizen
+```
+
+Add the following configuration to `~/.czrc`:
+
+```json
+{
+  "path": "cz-git"
+}
+```
+
+lazygit でコミット時に cz-git を使う場合は、以下の設定を `~/Library/Application Support/lazygit/config.yml` (macOS) に追加してください。
+
+```yaml
+customCommands:
+  - key: "c"
+    context: "files"
+    command: "/Users/{user_name}/.nvm/versions/node/{version}/bin/cz"
+    description: "Commit with cz-git"
+    subprocess: true
+```
+
+※ nvm を使用している場合、`cz` コマンドのフルパスを指定する必要があります。パスは `which cz` で確認できます。
+
 It is recommended to add the following configuration to /Users/{user_name}/.zshrc.
 
 ```
