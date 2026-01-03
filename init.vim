@@ -242,6 +242,21 @@ let g:gitblame_highlight_group = 'Comment'
 " トグル（常時ONだとうるさい時用）
 nnoremap <leader>gb :GitBlameToggle<CR>
 
+" ==================================================
+" GitGutter（VSCodeライクの塗りつぶしスタイル）
+" ==================================================
+let g:gitgutter_sign_added = '▎'
+let g:gitgutter_sign_modified = '▎'
+let g:gitgutter_sign_removed = '▎'
+let g:gitgutter_sign_removed_first_line = '▎'
+let g:gitgutter_sign_removed_above_and_below = '▎'
+let g:gitgutter_sign_modified_removed = '▎'
+
+" 差分出た時のハイライトカラー
+highlight GitGutterAdd    guifg=#587c0c ctermfg=2
+highlight GitGutterChange guifg=#0c7d9d ctermfg=3
+highlight GitGutterDelete guifg=#94151b ctermfg=1
+
 " 変更箇所を移動
 nnoremap ]c :GitGutterNextHunk<CR>
 nnoremap [c :GitGutterPrevHunk<CR>
