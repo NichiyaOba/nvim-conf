@@ -316,10 +316,10 @@ function! s:coc_jump_vsplit(action) abort
   normal! zvzz
 endfunction
 
-nnoremap <silent> gd :call <SID>coc_jump_vsplit_safe('jumpDefinition')<CR>
-nnoremap <silent> gy :call <SID>coc_jump_vsplit_safe('jumpTypeDefinition')<CR>
-nnoremap <silent> gi :call <SID>coc_jump_vsplit_safe('jumpImplementation')<CR>
-nnoremap <silent> gr :call <SID>coc_jump_vsplit_safe('jumpReferences')<CR>
+nnoremap <silent> gd :call <SID>coc_jump_vsplit('jumpDefinition')<CR>
+nnoremap <silent> gy :call <SID>coc_jump_vsplit('jumpTypeDefinition')<CR>
+nnoremap <silent> gi :call <SID>coc_jump_vsplit('jumpImplementation')<CR>
+nnoremap <silent> gr :call <SID>coc_jump_vsplit('jumpReferences')<CR>
 
 
 nnoremap <silent> <leader>gd :CocFzfList definitions<CR>
