@@ -383,6 +383,14 @@ nnoremap <silent> <leader>gi :CocFzfList implementations<CR>
 
 inoremap <expr> <CR> pumvisible() ? coc#_select_confirm() : "\<CR>"
 
+" カーソル下のシンボルと同じシンボルをハイライト（VSCode風）
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" ハイライトの色設定
+highlight CocHighlightText guibg=#3d4f5f gui=bold
+highlight CocHighlightRead guibg=#304030 gui=bold
+highlight CocHighlightWrite guibg=#503030 gui=bold
+
 " 定義ジャンプの戻り
 nnoremap <leader>b <C-o>   " 戻る
 nnoremap <leader>f <C-i>   " 進む
