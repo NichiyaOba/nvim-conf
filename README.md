@@ -125,11 +125,19 @@ brew install git-delta
 `~/Library/Application Support/lazygit/config.yml` (macOS) に以下を追加:
 
 ```yaml
+gui:
+  splitDiff: 'horizontal'  # 上下分割（ファイル一覧が上、差分が下）
+
 git:
   paging:
     colorArg: always
     pager: delta --dark --paging=never
 ```
+
+※ `splitDiff` のオプション:
+- `'horizontal'` - 上下分割
+- `'vertical'` - 左右分割（デフォルト）
+- `'auto'` - ウィンドウサイズに応じて自動切替
 
 ### 3. delta のカスタマイズ（オプション）
 
