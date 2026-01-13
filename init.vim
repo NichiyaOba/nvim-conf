@@ -119,6 +119,18 @@ require("nvim-tree").setup({
     side = "left",
   },
 
+  git = {
+    enable = true,
+    ignore = false,
+    timeout = 500,
+  },
+
+  filesystem_watchers = {
+    enable = true,
+    debounce_delay = 50,
+    ignore_dirs = {},
+  },
+
   renderer = {
     highlight_git = true,
     highlight_opened_files = "name",
@@ -179,7 +191,30 @@ require("nvim-tree").setup({
 EOF
 
 " nvim-treeをリロードするキーマッピングを追加
-nnoremap <leader>r :lua require("nvim-tree.api").tree.reload()<CR>:GitGutter<CR>
+lua << EOF
+local function reload_all()
+  local nvim_tree_api = require("nvim-tree.api")
+
+  -- nvim-tree の git キャッシュをクリアしてリロード
+  local ok, git = pcall(require, "nvim-tree.git")
+  if ok and git.purge_all then
+    git.purge_all()
+  end
+
+  -- ツリーをリロード
+  nvim_tree_api.tree.reload()
+
+  -- 全バッファの GitGutter を更新
+  vim.cmd("GitGutterAll")
+
+  -- ファイルの外部変更も検知
+  vim.cmd("checktime")
+
+  print("Reloaded: nvim-tree + GitGutter")
+end
+
+vim.keymap.set('n', '<leader>r', reload_all, { noremap = true, silent = false })
+EOF
 
 " ==================================================
 " Git コマンド
