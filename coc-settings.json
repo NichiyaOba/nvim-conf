@@ -10,10 +10,9 @@
   "[javascriptreact]": { "coc.preferences.formatOnSave": true },
   "go.goplsOptions": {
     "semanticTokens": true,
-    "codelenes": { "gc_details": true },
-    "ui.semanticTokens": true,
-    "ui.inlayhint.enabled": true
+    "codelens": { "gc_details": true }
   },
+  "go.inlayHints.enable": true,
 
   // Prettier で整形
   "prettier.enable": true,
