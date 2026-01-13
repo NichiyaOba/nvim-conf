@@ -110,6 +110,46 @@ customCommands:
 
 ※ nvm を使用している場合、`cz` コマンドのフルパスを指定する必要があります。パスは `which cz` で確認できます。
 
+## lazygit でシンタックスハイライト付き差分表示
+
+lazygit の差分表示にシンタックスハイライトを適用するには、**delta** を使用します。
+
+### 1. delta のインストール
+
+```bash
+brew install git-delta
+```
+
+### 2. lazygit の設定ファイルに追加
+
+`~/Library/Application Support/lazygit/config.yml` (macOS) に以下を追加:
+
+```yaml
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+```
+
+### 3. delta のカスタマイズ（オプション）
+
+`~/.gitconfig` に以下を追加すると、より見やすくなります:
+
+```ini
+[delta]
+    navigate = true
+    light = false
+    side-by-side = false
+    line-numbers = true
+    syntax-theme = Dracula
+```
+
+※ `syntax-theme` は `Dracula`, `OneHalfDark`, `Nord` などから選択できます。`delta --list-syntax-themes` で一覧を確認できます。
+
+※ `side-by-side = true` にすると横並び差分になりますが、lazygit のウィンドウ幅によっては見づらくなる場合があります。
+
+---
+
 It is recommended to add the following configuration to /Users/{user_name}/.zshrc.
 
 ```
