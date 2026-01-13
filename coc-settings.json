@@ -10,7 +10,7 @@
   "[javascriptreact]": { "coc.preferences.formatOnSave": true },
   "go.goplsOptions": {
     "semanticTokens": true,
-    "codelens": { "gc_details": true }
+    "codelenses": { "gc_details": true }
   },
   "go.inlayHints.enable": true,
 
