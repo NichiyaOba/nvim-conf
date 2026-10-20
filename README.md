@@ -168,3 +168,11 @@ setopt share_history       # Share command history across all zsh sessions
 setopt inc_append_history  # Immediately append commands to the history file as they are executed
 
 ```
+
+## tmux プラグイン管理
+
+tmux のプラグイン管理には [tpm (Tmux Plugin Manager)](https://github.com/tmux-plugins/tpm) を使用します。
+
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
