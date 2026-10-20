@@ -20,6 +20,10 @@ if isdirectory(s:plugged . '/tokyonight.nvim')
   source ~/.config/nvim/conf/colorscheme.vim
 endif
 
+if isdirectory(s:plugged . '/lualine.nvim')
+  source ~/.config/nvim/conf/lualine.vim
+endif
+
 if isdirectory(s:plugged . '/nvim-tree.lua')
   source ~/.config/nvim/conf/nvim-tree.vim
 endif

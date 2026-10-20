@@ -13,6 +13,9 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" ステータスライン / Winbar
+Plug 'nvim-lualine/lualine.nvim'
+
 " Git
 Plug 'airblade/vim-gitgutter'
 Plug 'nvim-lua/plenary.nvim'
