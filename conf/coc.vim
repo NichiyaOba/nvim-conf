@@ -1,6 +1,14 @@
 " ==================================================
 " Coc / LSP
 " ==================================================
+" 自動インストールするcoc拡張機能
+let g:coc_global_extensions = [
+      \ 'coc-tsserver',
+      \ 'coc-prettier',
+      \ 'coc-go',
+      \ 'coc-json',
+      \ ]
+
 function! s:coc_jump_vsplit(action) abort
   " 元ウィンドウを記録
   let l:origin_win = win_getid()
