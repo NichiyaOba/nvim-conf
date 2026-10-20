@@ -23,7 +23,7 @@
   "suggest.autoTrigger": "always",
   "typescript.suggest.autoImports": true,
   "javascript.suggest.autoImports": true,
-  "coc.preferences.formatOnSave": true,
+  "coc.preferences.formatOnSave": false,
 
   // Terraform LSP設定
   "languageserver": {
